@@ -1,0 +1,1254 @@
+<!DOCTYPE html>
+<html lang="de" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Link-Hub • Material 3 Expressive Monochrome</title>
+
+  <!-- Google Fonts & Material Symbols -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wght@8..144,300..800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet" />
+
+  <style>
+    :root {
+      --bg-blur: 0px;
+      --bg-image: none;
+    }
+
+    /* Dark Mode (Default) */
+    [data-theme="dark"] {
+      --bg-color: #111111;
+      --md-sys-color-surface: #1E1E1E;
+      --md-sys-color-surface-variant: #262626;
+      --md-sys-color-surface-container: #262626;
+      --md-sys-color-surface-container-high: #323232;
+      --md-sys-color-on-surface: #E3E3E3;
+      --md-sys-color-on-surface-variant: #C4C4C4;
+      --md-sys-color-outline: #474747;
+      --md-sys-color-outline-variant: #2E2E2E;
+      --md-sys-color-primary: #FFFFFF;
+      --md-sys-color-on-primary: #111111;
+      --md-sys-color-primary-container: #333333;
+      --md-sys-color-on-primary-container: #F0F0F0;
+      --md-sys-color-error: #FFB4AB;
+    }
+
+    /* Light Mode */
+    [data-theme="light"] {
+      --bg-color: #F4F4F6;
+      --md-sys-color-surface: #FFFFFF;
+      --md-sys-color-surface-variant: #EFEFF3;
+      --md-sys-color-surface-container: #E8E8EC;
+      --md-sys-color-surface-container-high: #DEDEDE;
+      --md-sys-color-on-surface: #1A1A1A;
+      --md-sys-color-on-surface-variant: #555555;
+      --md-sys-color-outline: #CCCCCC;
+      --md-sys-color-outline-variant: #DDDDDD;
+      --md-sys-color-primary: #1A1A1A;
+      --md-sys-color-on-primary: #FFFFFF;
+      --md-sys-color-primary-container: #E0E0E4;
+      --md-sys-color-on-primary-container: #1A1A1A;
+      --md-sys-color-error: #BA1A1A;
+    }
+
+    /* Color Theme Overrides */
+    [data-color-theme="oled"] {
+      --bg-color: #000000;
+      --md-sys-color-surface: #0A0A0A;
+      --md-sys-color-surface-container: #141414;
+      --md-sys-color-surface-container-high: #1F1F1F;
+    }
+
+    [data-color-theme="slate"] {
+      --md-sys-color-primary: #90CAF9;
+      --md-sys-color-primary-container: #1E3A5F;
+      --md-sys-color-on-primary-container: #E3F2FD;
+    }
+
+    [data-color-theme="zinc"] {
+      --md-sys-color-primary: #D4D4D8;
+      --md-sys-color-primary-container: #27272A;
+      --md-sys-color-on-primary-container: #FAFAFA;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      font-family: 'Roboto Flex', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: var(--bg-color);
+      background-image: var(--bg-image);
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      color: var(--md-sys-color-on-surface);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px 16px;
+      position: relative;
+    }
+
+    .bg-backdrop {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      backdrop-filter: blur(var(--bg-blur));
+      -webkit-backdrop-filter: blur(var(--bg-blur));
+      background-color: rgba(17, 17, 17, 0.4);
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .watermark {
+      position: fixed;
+      bottom: 16px;
+      right: 20px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      color: var(--md-sys-color-on-surface);
+      opacity: 0.35;
+      z-index: 50;
+      pointer-events: none;
+      user-select: none;
+      text-transform: uppercase;
+    }
+
+    .app-card {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 460px;
+      background: var(--md-sys-color-surface);
+      border: 1px solid var(--md-sys-color-outline-variant);
+      border-radius: 24px;
+      padding: 28px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4);
+    }
+
+    .profile-section {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 12px;
+      width: 100%;
+    }
+
+    .avatar-container {
+      width: 84px;
+      height: 84px;
+      border-radius: 20px;
+      background-color: var(--md-sys-color-surface-container-high);
+      color: var(--md-sys-color-on-surface);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      border: 2px solid var(--md-sys-color-outline);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+
+    .avatar-container img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .banner-container {
+      width: 100%;
+      height: 100px;
+      border-radius: 16px;
+      overflow: hidden;
+      display: none;
+      position: relative;
+      border: 1px solid var(--md-sys-color-outline-variant);
+    }
+
+    .banner-container.visible {
+      display: block;
+    }
+
+    .banner-container img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      mask-image: linear-gradient(to right, rgba(0,0,0,1) 50%, rgba(0,0,0,0) 100%);
+      -webkit-mask-image: linear-gradient(to right, rgba(0,0,0,1) 50%, rgba(0,0,0,0) 100%);
+    }
+
+    .profile-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--md-sys-color-primary);
+    }
+
+    .profile-bio {
+      font-size: 0.9rem;
+      color: var(--md-sys-color-on-surface-variant);
+      line-height: 1.4;
+      max-width: 340px;
+    }
+
+    .links-container {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .link-card {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      padding: 12px 16px;
+      background-color: var(--md-sys-color-surface-container);
+      color: var(--md-sys-color-on-surface);
+      border-radius: 16px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+      border: 1px solid var(--md-sys-color-outline-variant);
+      position: relative;
+      overflow: hidden;
+      transition: transform 200ms cubic-bezier(0.34, 1.56, 0.64, 1), background-color 200ms ease;
+    }
+
+    .link-card.has-banner {
+      padding: 0;
+      min-height: 64px;
+    }
+
+    .link-card-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.35;
+      z-index: 0;
+      mask-image: linear-gradient(to right, rgba(0,0,0,0.1) 20%, rgba(0,0,0,1) 80%);
+      -webkit-mask-image: linear-gradient(to right, rgba(0,0,0,0.1) 20%, rgba(0,0,0,1) 80%);
+    }
+
+    .link-card.featured {
+      background-color: var(--md-sys-color-primary-container);
+      color: var(--md-sys-color-on-primary-container);
+      border-color: var(--md-sys-color-outline);
+    }
+
+    .link-card:hover {
+      transform: translateY(-2px) scale(1.01);
+      background-color: var(--md-sys-color-surface-container-high);
+    }
+
+    .link-content {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      position: relative;
+      z-index: 1;
+      padding: 12px 16px;
+      width: 100%;
+      justify-content: space-between;
+    }
+
+    .link-content-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .link-icon {
+      font-size: 22px;
+    }
+
+    .arrow-icon {
+      font-size: 18px;
+      opacity: 0.5;
+    }
+
+    /* Footer Social Icons Row */
+    .footer-social-icons {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      justify-content: center;
+      margin-top: 2px;
+    }
+
+    .social-icon-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: 9999px;
+      background-color: var(--md-sys-color-surface-container);
+      border: 1px solid var(--md-sys-color-outline-variant);
+      color: var(--md-sys-color-on-surface-variant);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      font-size: 18px;
+      transition: transform 200ms ease, background-color 200ms ease, color 200ms ease;
+    }
+
+    .social-icon-btn:hover {
+      transform: scale(1.15);
+      background-color: var(--md-sys-color-primary-container);
+      color: var(--md-sys-color-primary);
+    }
+
+    /* Settings Icon-Only Button (Bottom Left) */
+    .admin-fab {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      z-index: 100;
+      background-color: var(--md-sys-color-primary-container);
+      color: var(--md-sys-color-on-primary-container);
+      border: 1px solid var(--md-sys-color-outline);
+      border-radius: 9999px;
+      width: 48px;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+      transition: transform 200ms ease, background-color 200ms ease;
+    }
+
+    .admin-fab:hover {
+      transform: scale(1.1);
+      background-color: var(--md-sys-color-surface-container-high);
+      color: var(--md-sys-color-primary);
+    }
+
+    .admin-fab .material-symbols-outlined {
+      font-size: 24px;
+    }
+
+    /* Admin Modal */
+    .admin-modal-backdrop {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(8px);
+      z-index: 200;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 250ms ease;
+    }
+
+    .admin-modal-backdrop.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .admin-modal {
+      width: 100%;
+      max-width: 580px;
+      max-height: 90vh;
+      background: var(--md-sys-color-surface-variant);
+      border: 1px solid var(--md-sys-color-outline);
+      border-radius: 24px;
+      padding: 28px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      overflow-y: auto;
+      box-shadow: 0 16px 40px rgba(0,0,0,0.6);
+    }
+
+    .admin-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .admin-header h2 {
+      font-size: 1.25rem;
+      color: var(--md-sys-color-primary);
+    }
+
+    .icon-btn {
+      background: none;
+      border: none;
+      color: var(--md-sys-color-on-surface);
+      cursor: pointer;
+      font-size: 22px;
+      padding: 4px;
+      border-radius: 9999px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .icon-btn:hover {
+      background-color: var(--md-sys-color-surface-container-high);
+    }
+
+    .admin-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      background: var(--md-sys-color-surface);
+      padding: 6px;
+      border-radius: 12px;
+      border: 1px solid var(--md-sys-color-outline-variant);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .admin-tab {
+      flex: 1;
+      min-width: 95px;
+      background: none;
+      border: none;
+      padding: 8px;
+      font-family: inherit;
+      font-weight: 600;
+      font-size: 0.8rem;
+      color: var(--md-sys-color-on-surface-variant);
+      border-radius: 8px;
+      cursor: pointer;
+      text-align: center;
+      white-space: nowrap;
+    }
+
+    .admin-tab.active {
+      background: var(--md-sys-color-primary-container);
+      color: var(--md-sys-color-primary);
+    }
+
+    .tab-content {
+      display: none;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .tab-content.active {
+      display: flex;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .form-group label {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--md-sys-color-on-surface-variant);
+    }
+
+    .form-control {
+      background: var(--md-sys-color-surface);
+      border: 1px solid var(--md-sys-color-outline);
+      color: var(--md-sys-color-on-surface);
+      padding: 10px 14px;
+      border-radius: 10px;
+      font-family: inherit;
+      font-size: 0.9rem;
+      outline: none;
+    }
+
+    .form-control:focus {
+      border-color: var(--md-sys-color-primary);
+    }
+
+    .btn-primary {
+      background: var(--md-sys-color-primary);
+      color: var(--md-sys-color-on-primary);
+      border: none;
+      padding: 10px 16px;
+      font-family: inherit;
+      font-weight: 600;
+      font-size: 0.9rem;
+      border-radius: 10px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .btn-secondary {
+      background: var(--md-sys-color-surface-container-high);
+      color: var(--md-sys-color-on-surface);
+      border: 1px solid var(--md-sys-color-outline);
+      padding: 10px 16px;
+      font-family: inherit;
+      font-weight: 600;
+      font-size: 0.9rem;
+      border-radius: 10px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .btn-danger {
+      background: #410002;
+      color: var(--md-sys-color-error);
+      border: 1px solid #8C0009;
+      padding: 6px 10px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+
+    .link-item-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--md-sys-color-surface);
+      border: 1px solid var(--md-sys-color-outline-variant);
+      padding: 8px 10px;
+      border-radius: 10px;
+      gap: 8px;
+    }
+
+    .link-item-info {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      overflow: hidden;
+      flex: 1;
+    }
+
+    .link-item-info span {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+
+    .link-item-actions {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .icon-action-btn {
+      background: var(--md-sys-color-surface-container);
+      border: 1px solid var(--md-sys-color-outline-variant);
+      color: var(--md-sys-color-on-surface);
+      width: 30px;
+      height: 30px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+
+    .checkbox-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+      font-size: 0.85rem;
+      font-weight: 500;
+    }
+
+    .checkbox-row input {
+      width: 16px;
+      height: 16px;
+      accent-color: var(--md-sys-color-primary);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="bg-backdrop" id="bgBackdrop"></div>
+  <div class="watermark">ToxicLemon</div>
+
+  <main class="app-card">
+    <div class="banner-container" id="displayBanner">
+      <img id="bannerImg" src="" alt="Banner">
+    </div>
+
+    <header class="profile-section">
+      <div class="avatar-container" id="displayAvatar">
+        <span class="material-symbols-outlined">person</span>
+      </div>
+      <h1 class="profile-title" id="displayName">Dein Name</h1>
+      <p class="profile-bio" id="displayBio">Developer • Hier findest du all meine wichtigen Kanäle und Projekte.</p>
+    </header>
+
+    <div class="links-container" id="displayLinks"></div>
+    <div class="footer-social-icons" id="footerSocialIcons"></div>
+
+    <footer style="font-size: 0.7rem; color: var(--md-sys-color-outline); text-align: center;">
+      <span>Material 3 Expressive</span>
+    </footer>
+  </main>
+
+  <!-- Settings Button (Icon Only) -->
+  <button class="admin-fab" onclick="openAdminModal()" title="Settings">
+    <span class="material-symbols-outlined">settings</span>
+  </button>
+
+  <!-- Settings / Admin Modal -->
+  <div class="admin-modal-backdrop" id="adminModal">
+    <div class="admin-modal">
+      <div class="admin-header">
+        <h2>Settings & Admin</h2>
+        <button class="icon-btn" onclick="closeAdminModal()">
+          <span class="material-symbols-outlined">close</span>
+        </button>
+      </div>
+
+      <div class="admin-tabs">
+        <button class="admin-tab active" onclick="switchTab('settings')">Settings</button>
+        <button class="admin-tab" onclick="switchTab('links')">Links & Icons</button>
+        <button class="admin-tab" onclick="switchTab('profile')">Profil</button>
+        <button class="admin-tab" onclick="switchTab('background')">Hintergrund</button>
+        <button class="admin-tab" onclick="switchTab('json')">JSON / GitHub</button>
+      </div>
+
+      <!-- Tab 1: Settings -->
+      <div class="tab-content active" id="tabSettings">
+        <h3>Darstellung & Design</h3>
+        
+        <div class="form-group">
+          <label>Modus (Dark / Light)</label>
+          <select id="settingThemeMode" class="form-control" onchange="updateSettingsLive()">
+            <option value="dark">Dunkel (Dark Mode)</option>
+            <option value="light">Hell (Light Mode)</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Farb-Theme / Palette</label>
+          <select id="settingColorTheme" class="form-control" onchange="updateSettingsLive()">
+            <option value="default">Standard Monochrome</option>
+            <option value="oled">OLED Pitch Black (Rein Schwarz)</option>
+            <option value="slate">Slate Blue (Blau-Grau)</option>
+            <option value="zinc">Zinc Minimal</option>
+          </select>
+        </div>
+
+        <hr style="border: 0; border-top: 1px solid var(--md-sys-color-outline-variant); margin: 6px 0;">
+
+        <h3>Erstellen & Aktionen</h3>
+        <p style="font-size: 0.8rem; color: var(--md-sys-color-on-surface-variant);">
+          Nutze den Create-Button, um schnell ein neues Projekt-Template oder einen Eintrag zu generieren.
+        </p>
+        <button class="btn-primary" onclick="quickCreateItem()">
+          <span class="material-symbols-outlined">add_circle</span> Create Neues Projekt
+        </button>
+      </div>
+
+      <!-- Tab 2: Links & Footer Icons Management -->
+      <div class="tab-content" id="tabLinks">
+        <h3>Links & Footer Icons verwalten</h3>
+        <div id="adminLinksList"></div>
+
+        <hr style="border: 0; border-top: 1px solid var(--md-sys-color-outline-variant); margin: 6px 0;">
+
+        <h3 id="formSectionTitle">Neuen Link hinzufügen</h3>
+        <div class="form-group">
+          <label>Titel (Wählt automatisch das passende Icon)</label>
+          <input type="text" id="newLinkTitle" class="form-control" placeholder="z. B. GitHub oder YouTube" oninput="onNewLinkTitleInput()">
+        </div>
+        <div class="form-group">
+          <label>URL</label>
+          <input type="text" id="newLinkUrl" class="form-control" placeholder="https://...">
+        </div>
+        <div class="form-group">
+          <label>Material Symbol Icon</label>
+          <select id="newLinkIcon" class="form-control">
+            <option value="link">Standard Link (link)</option>
+            <option value="code_blocks">GitHub / Code (code_blocks)</option>
+            <option value="play_circle">YouTube / Video (play_circle)</option>
+            <option value="forum">Discord / Forum (forum)</option>
+            <option value="mail">E-Mail / Kontakt (mail)</option>
+            <option value="send">Telegram / Send (send)</option>
+            <option value="photo_camera">Instagram / Photo (photo_camera)</option>
+            <option value="sports_esports">Gaming / Minecraft (sports_esports)</option>
+            <option value="download">Download / App (download)</option>
+            <option value="terminal">Terminal / Shell (terminal)</option>
+            <option value="laptop">Laptop / Hardware (laptop)</option>
+            <option value="smartphone">Smartphone / Android (smartphone)</option>
+            <option value="rocket_launch">Rocket / Highlight (rocket_launch)</option>
+            <option value="folder">Ordner / Projekt (folder)</option>
+            <option value="star">Stern / Favorit (star)</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Link Banner Bild URL (optional)</label>
+          <input type="text" id="newLinkBanner" class="form-control" placeholder="https://...">
+          <input type="file" class="form-control" accept="image/*" onchange="uploadLinkBannerImage(event)" style="margin-top:4px; padding:4px; cursor:pointer;">
+        </div>
+        <div class="checkbox-row">
+          <input type="checkbox" id="newLinkOnlyFooter">
+          <label for="newLinkOnlyFooter">Nur in Fußleiste anzeigen (nicht oben in der Hauptliste)</label>
+        </div>
+        <div class="checkbox-row">
+          <input type="checkbox" id="newLinkFeatured">
+          <label for="newLinkFeatured">Als Highlight markieren (Primary Container)</label>
+        </div>
+
+        <div style="display: flex; gap: 8px; margin-top: 6px;">
+          <button class="btn-primary" id="saveLinkBtn" onclick="saveLink()" style="flex: 1;">
+            <span class="material-symbols-outlined">add</span> Link hinzufügen
+          </button>
+          <button class="btn-secondary" id="cancelEditBtn" onclick="cancelEdit()" style="display: none;">
+            Abbrechen
+          </button>
+        </div>
+      </div>
+
+      <!-- Tab 3: Profile Settings -->
+      <div class="tab-content" id="tabProfile">
+        <div class="form-group">
+          <label>Name / Titel</label>
+          <input type="text" id="inputName" class="form-control" oninput="updateProfileLive()">
+        </div>
+        <div class="form-group">
+          <label>Bio / Beschreibung</label>
+          <textarea id="inputBio" class="form-control" rows="2" oninput="updateProfileLive()"></textarea>
+        </div>
+        <div class="form-group">
+          <label>Profilbild (URL oder Datei)</label>
+          <input type="text" id="inputAvatar" class="form-control" placeholder="https://..." oninput="updateProfileLive()">
+          <input type="file" class="form-control" accept="image/*" onchange="uploadImage(event, 'avatar')" style="margin-top:4px; padding:4px; cursor:pointer;">
+        </div>
+        <div class="form-group">
+          <label>Haupt-Banner Bild (Verschwimmt nach rechts)</label>
+          <input type="text" id="inputBanner" class="form-control" placeholder="https://..." oninput="updateProfileLive()">
+          <input type="file" class="form-control" accept="image/*" onchange="uploadImage(event, 'banner')" style="margin-top:4px; padding:4px; cursor:pointer;">
+        </div>
+      </div>
+
+      <!-- Tab 4: Background Settings -->
+      <div class="tab-content" id="tabBackground">
+        <div class="form-group">
+          <label>Hintergrundbild (URL oder Datei)</label>
+          <input type="text" id="inputBgImage" class="form-control" placeholder="https://..." oninput="updateBackgroundLive()">
+          <input type="file" class="form-control" accept="image/*" onchange="uploadImage(event, 'background')" style="margin-top:4px; padding:4px; cursor:pointer;">
+        </div>
+        <div class="form-group">
+          <label>Hintergrund-Farbe (falls kein Bild)</label>
+          <input type="color" id="inputBgColor" class="form-control" value="#111111" onchange="updateBackgroundLive()" style="height: 38px; cursor: pointer;">
+        </div>
+        <div class="form-group">
+          <label>Hintergrund Blur (Weichzeichner)</label>
+          <div style="display: flex; align-items: center; gap: 14px;">
+            <input type="range" id="inputBgBlur" min="0" max="30" value="0" oninput="updateBackgroundLive()" style="flex:1; accent-color: var(--md-sys-color-primary);">
+            <span id="blurValueLabel" style="font-size: 0.8rem; font-weight: 600; width: 36px;">0px</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab 5: JSON & GitHub Sync -->
+      <div class="tab-content" id="tabJson">
+        <h3>GitHub & JSON Sync</h3>
+        <p style="font-size: 0.8rem; color: var(--md-sys-color-on-surface-variant);">
+          Ziehe direkt die neueste Konfiguration aus deinem GitHub Repository oder exportiere/importiere deine JSON-Datei.
+        </p>
+        
+        <button class="btn-primary" onclick="fetchFromGitHub()">
+          <span class="material-symbols-outlined">cloud_download</span> Neueste Version von GitHub laden
+        </button>
+
+        <button class="btn-secondary" onclick="exportJSON()">
+          <span class="material-symbols-outlined">download</span> Als JSON exportieren
+        </button>
+
+        <div class="form-group" style="margin-top: 4px;">
+          <label>JSON Datei importieren</label>
+          <input type="file" id="importFile" class="form-control" accept=".json" onchange="importJSON(event)" style="padding: 6px; cursor: pointer;">
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    let siteData = {
+      settings: {
+        themeMode: "dark",
+        colorTheme: "default"
+      },
+      profile: {
+        name: "Dein Name",
+        bio: "Developer & Designer • Hier findest du all meine wichtigen Kanäle und Projekte.",
+        avatar: "",
+        banner: ""
+      },
+      background: {
+        image: "",
+        color: "#111111",
+        blur: 0
+      },
+      links: [
+        { title: "GitHub", url: "https://github.com", icon: "code_blocks", featured: true, banner: "", onlyInFooter: false },
+        { title: "YouTube", url: "https://youtube.com", icon: "play_circle", featured: false, banner: "", onlyInFooter: false },
+        { title: "Discord", url: "https://discord.com", icon: "forum", featured: false, banner: "", onlyInFooter: false },
+        { title: "E-Mail", url: "mailto:deine@email.de", icon: "mail", featured: false, banner: "", onlyInFooter: false }
+      ]
+    };
+
+    let tempLinkBannerBase64 = "";
+    let editingIndex = null;
+
+    function autoDetectIcon(title) {
+      const t = title.toLowerCase();
+      if (t.includes('github') || t.includes('git') || t.includes('code')) return 'code_blocks';
+      if (t.includes('youtube') || t.includes('video') || t.includes('yt')) return 'play_circle';
+      if (t.includes('discord') || t.includes('chat')) return 'forum';
+      if (t.includes('mail') || t.includes('kontakt') || t.includes('@')) return 'mail';
+      if (t.includes('telegram') || t.includes('tg')) return 'send';
+      if (t.includes('instagram') || t.includes('insta')) return 'photo_camera';
+      if (t.includes('game') || t.includes('minecraft')) return 'sports_esports';
+      if (t.includes('download') || t.includes('app')) return 'download';
+      if (t.includes('terminal') || t.includes('shell')) return 'terminal';
+      if (t.includes('laptop') || t.includes('pc')) return 'laptop';
+      if (t.includes('android') || t.includes('phone')) return 'smartphone';
+      return 'link';
+    }
+
+    function onNewLinkTitleInput() {
+      if (editingIndex !== null) return;
+      const titleVal = document.getElementById('newLinkTitle').value;
+      document.getElementById('newLinkIcon').value = autoDetectIcon(titleVal);
+    }
+
+    function loadData() {
+      const saved = localStorage.getItem('material_link_hub_data');
+      if (saved) {
+        try {
+          siteData = JSON.parse(saved);
+          if (!siteData.settings) siteData.settings = { themeMode: "dark", colorTheme: "default" };
+          if (siteData.links) {
+            siteData.links.forEach(l => {
+              if (l.onlyInFooter === undefined) l.onlyInFooter = false;
+            });
+          }
+        } catch (e) {
+          console.error("Fehler beim Laden", e);
+        }
+      }
+    }
+
+    function saveData() {
+      localStorage.setItem('material_link_hub_data', JSON.stringify(siteData));
+    }
+
+    function render() {
+      const mode = siteData.settings.themeMode || "dark";
+      const colTheme = siteData.settings.colorTheme || "default";
+      document.documentElement.setAttribute('data-theme', mode);
+      document.documentElement.setAttribute('data-color-theme', colTheme);
+
+      document.getElementById('displayName').textContent = siteData.profile.name || "Dein Name";
+      document.getElementById('displayBio').textContent = siteData.profile.bio || "";
+      
+      const avatarContainer = document.getElementById('displayAvatar');
+      if (siteData.profile.avatar && siteData.profile.avatar.trim() !== "") {
+        avatarContainer.innerHTML = `<img src="${siteData.profile.avatar}" alt="Profilbild">`;
+      } else {
+        avatarContainer.innerHTML = `<span class="material-symbols-outlined">person</span>`;
+      }
+
+      const bannerContainer = document.getElementById('displayBanner');
+      const bannerImg = document.getElementById('bannerImg');
+      if (siteData.profile.banner && siteData.profile.banner.trim() !== "") {
+        bannerImg.src = siteData.profile.banner;
+        bannerContainer.classList.add('visible');
+      } else {
+        bannerContainer.classList.remove('visible');
+        bannerImg.src = '';
+      }
+
+      const body = document.body;
+      body.style.backgroundColor = siteData.background.color || "#111111";
+      if (siteData.background.image && siteData.background.image.trim() !== "") {
+        body.style.backgroundImage = `url('${siteData.background.image}')`;
+      } else {
+        body.style.backgroundImage = 'none';
+      }
+      const blurVal = siteData.background.blur || 0;
+      document.documentElement.style.setProperty('--bg-blur', blurVal + 'px');
+      document.getElementById('blurValueLabel').textContent = blurVal + 'px';
+
+      const linksContainer = document.getElementById('displayLinks');
+      linksContainer.innerHTML = '';
+      const footerIconsContainer = document.getElementById('footerSocialIcons');
+      footerIconsContainer.innerHTML = '';
+
+      if (siteData.links) {
+        siteData.links.forEach(link => {
+          // 1. Hauptkarte NUR rendern, wenn nicht onlyInFooter
+          if (!link.onlyInFooter) {
+            const a = document.createElement('a');
+            a.href = link.url || "#";
+            a.target = "_blank";
+            a.rel = "noopener";
+            
+            const hasBanner = link.banner && link.banner.trim() !== "";
+            a.className = `link-card ${link.featured ? 'featured' : ''} ${hasBanner ? 'has-banner' : ''}`;
+            
+            let bannerHtml = hasBanner ? `<img src="${link.banner}" class="link-card-bg" alt="">` : '';
+            
+            a.innerHTML = `
+              ${bannerHtml}
+              <div class="link-content">
+                <div class="link-content-left">
+                  <span class="material-symbols-outlined link-icon">${link.icon || 'link'}</span>
+                  <span>${link.title || 'Link'}</span>
+                </div>
+                <span class="material-symbols-outlined arrow-icon">arrow_forward</span>
+              </div>
+            `;
+            linksContainer.appendChild(a);
+          }
+
+          // 2. Fußleisten-Icon für ALLE Links anzeigen
+          const footerIcon = document.createElement('a');
+          footerIcon.href = link.url || "#";
+          footerIcon.target = "_blank";
+          footerIcon.rel = "noopener";
+          footerIcon.className = 'social-icon-btn';
+          footerIcon.title = link.title;
+          footerIcon.innerHTML = `<span class="material-symbols-outlined" style="font-size:18px;">${link.icon || 'link'}</span>`;
+          footerIconsContainer.appendChild(footerIcon);
+        });
+      }
+
+      // Admin Links List
+      const adminList = document.getElementById('adminLinksList');
+      adminList.innerHTML = '';
+      if (!siteData.links || siteData.links.length === 0) {
+        adminList.innerHTML = `<p style="font-size:0.8rem; color:var(--md-sys-color-on-surface-variant);">Keine Links vorhanden.</p>`;
+      } else {
+        siteData.links.forEach((link, index) => {
+          const row = document.createElement('div');
+          row.className = 'link-item-row';
+          row.innerHTML = `
+            <div class="link-item-info">
+              <span class="material-symbols-outlined" style="font-size:18px;">${link.icon || 'link'}</span>
+              <span>${link.title} ${link.onlyInFooter ? '(Nur Fußleiste)' : ''}</span>
+            </div>
+            <div class="link-item-actions">
+              <button class="icon-action-btn" onclick="startEditLink(${index})" title="Bearbeiten">
+                <span class="material-symbols-outlined" style="font-size:16px;">edit</span>
+              </button>
+              <button class="icon-action-btn" onclick="moveLink(${index}, -1)" title="Nach oben" ${index === 0 ? 'style="opacity:0.3; pointer-events:none;"' : ''}>
+                <span class="material-symbols-outlined" style="font-size:16px;">arrow_upward</span>
+              </button>
+              <button class="icon-action-btn" onclick="moveLink(${index}, 1)" title="Nach unten" ${index === siteData.links.length - 1 ? 'style="opacity:0.3; pointer-events:none;"' : ''}>
+                <span class="material-symbols-outlined" style="font-size:16px;">arrow_downward</span>
+              </button>
+              <button class="btn-danger" onclick="deleteLink(${index})" title="Löschen">
+                <span class="material-symbols-outlined" style="font-size:14px;">delete</span>
+              </button>
+            </div>
+          `;
+          adminList.appendChild(row);
+        });
+      }
+
+      document.getElementById('settingThemeMode').value = mode;
+      document.getElementById('settingColorTheme').value = colTheme;
+      document.getElementById('inputName').value = siteData.profile.name || "";
+      document.getElementById('inputBio').value = siteData.profile.bio || "";
+      document.getElementById('inputAvatar').value = siteData.profile.avatar || "";
+      document.getElementById('inputBanner').value = siteData.profile.banner || "";
+      document.getElementById('inputBgImage').value = siteData.background.image || "";
+      document.getElementById('inputBgColor').value = siteData.background.color || "#111111";
+      document.getElementById('inputBgBlur').value = blurVal;
+    }
+
+    function openAdminModal() {
+      document.getElementById('adminModal').classList.add('open');
+    }
+
+    function closeAdminModal() {
+      document.getElementById('adminModal').classList.remove('open');
+      saveData();
+    }
+
+    function switchTab(tabName) {
+      document.querySelectorAll('.admin-tab').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+
+      const tabsMap = { 'settings': 0, 'links': 1, 'profile': 2, 'background': 3, 'json': 4 };
+      const contentsMap = { 'settings': 'tabSettings', 'links': 'tabLinks', 'profile': 'tabProfile', 'background': 'tabBackground', 'json': 'tabJson' };
+
+      document.querySelectorAll('.admin-tab')[tabsMap[tabName]].classList.add('active');
+      document.getElementById(contentsMap[tabName]).classList.add('active');
+    }
+
+    function updateSettingsLive() {
+      siteData.settings.themeMode = document.getElementById('settingThemeMode').value;
+      siteData.settings.colorTheme = document.getElementById('settingColorTheme').value;
+      saveData();
+      render();
+    }
+
+    function quickCreateItem() {
+      const title = prompt("Titel für den neuen Link / das neue Projekt:");
+      if (!title) return;
+      const url = prompt("URL (z. B. https://...):", "https://");
+      if (!url) return;
+
+      const icon = autoDetectIcon(title);
+      if (!siteData.links) siteData.links = [];
+      siteData.links.push({ title, url, icon, featured: false, banner: "", onlyInFooter: false });
+      saveData();
+      render();
+      alert(`Neues Projekt "${title}" erfolgreich erstellt!`);
+    }
+
+    function moveLink(index, direction) {
+      const newIndex = index + direction;
+      if (newIndex < 0 || newIndex >= siteData.links.length) return;
+      const temp = siteData.links[index];
+      siteData.links[index] = siteData.links[newIndex];
+      siteData.links[newIndex] = temp;
+      saveData();
+      render();
+    }
+
+    function updateProfileLive() {
+      siteData.profile.name = document.getElementById('inputName').value;
+      siteData.profile.bio = document.getElementById('inputBio').value;
+      siteData.profile.avatar = document.getElementById('inputAvatar').value;
+      siteData.profile.banner = document.getElementById('inputBanner').value;
+
+      document.getElementById('displayName').textContent = siteData.profile.name || "Dein Name";
+      document.getElementById('displayBio').textContent = siteData.profile.bio || "";
+      
+      const avatarContainer = document.getElementById('displayAvatar');
+      if (siteData.profile.avatar && siteData.profile.avatar.trim() !== "") {
+        avatarContainer.innerHTML = `<img src="${siteData.profile.avatar}" alt="Profilbild">`;
+      } else {
+        avatarContainer.innerHTML = `<span class="material-symbols-outlined">person</span>`;
+      }
+
+      const bannerContainer = document.getElementById('displayBanner');
+      const bannerImg = document.getElementById('bannerImg');
+      if (siteData.profile.banner && siteData.profile.banner.trim() !== "") {
+        bannerImg.src = siteData.profile.banner;
+        bannerContainer.classList.add('visible');
+      } else {
+        bannerContainer.classList.remove('visible');
+        bannerImg.src = '';
+      }
+
+      saveData();
+    }
+
+    function updateBackgroundLive() {
+      siteData.background.image = document.getElementById('inputBgImage').value;
+      siteData.background.color = document.getElementById('inputBgColor').value;
+      siteData.background.blur = parseInt(document.getElementById('inputBgBlur').value);
+
+      const body = document.body;
+      body.style.backgroundColor = siteData.background.color || "#111111";
+      if (siteData.background.image && siteData.background.image.trim() !== "") {
+        body.style.backgroundImage = `url('${siteData.background.image}')`;
+      } else {
+        body.style.backgroundImage = 'none';
+      }
+      document.documentElement.style.setProperty('--bg-blur', siteData.background.blur + 'px');
+      document.getElementById('blurValueLabel').textContent = siteData.background.blur + 'px';
+
+      saveData();
+    }
+
+    function uploadImage(event, targetType) {
+      const file = event.target.files[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        const base64String = e.target.result;
+        if (targetType === 'avatar') {
+          siteData.profile.avatar = base64String;
+          document.getElementById('inputAvatar').value = base64String;
+        } else if (targetType === 'banner') {
+          siteData.profile.banner = base64String;
+          document.getElementById('inputBanner').value = base64String;
+        } else if (targetType === 'background') {
+          siteData.background.image = base64String;
+          document.getElementById('inputBgImage').value = base64String;
+        }
+        updateProfileLive();
+        updateBackgroundLive();
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function uploadLinkBannerImage(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        tempLinkBannerBase64 = e.target.result;
+        document.getElementById('newLinkBanner').value = tempLinkBannerBase64;
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function startEditLink(index) {
+      editingIndex = index;
+      const link = siteData.links[index];
+      document.getElementById('newLinkTitle').value = link.title || '';
+      document.getElementById('newLinkUrl').value = link.url || '';
+      document.getElementById('newLinkIcon').value = link.icon || 'link';
+      document.getElementById('newLinkBanner').value = link.banner || '';
+      document.getElementById('newLinkOnlyFooter').checked = !!link.onlyInFooter;
+      document.getElementById('newLinkFeatured').checked = !!link.featured;
+      tempLinkBannerBase64 = link.banner || '';
+
+      document.getElementById('formSectionTitle').textContent = `Link bearbeiten (#${index + 1})`;
+      document.getElementById('saveLinkBtn').innerHTML = `<span class="material-symbols-outlined">save</span> Link aktualisieren`;
+      document.getElementById('cancelEditBtn').style.display = 'block';
+    }
+
+    function cancelEdit() {
+      editingIndex = null;
+      document.getElementById('newLinkTitle').value = '';
+      document.getElementById('newLinkUrl').value = '';
+      document.getElementById('newLinkIcon').value = 'link';
+      document.getElementById('newLinkBanner').value = '';
+      document.getElementById('newLinkOnlyFooter').checked = false;
+      document.getElementById('newLinkFeatured').checked = false;
+      tempLinkBannerBase64 = '';
+
+      document.getElementById('formSectionTitle').textContent = 'Neuen Link hinzufügen';
+      document.getElementById('saveLinkBtn').innerHTML = `<span class="material-symbols-outlined">add</span> Link hinzufügen`;
+      document.getElementById('cancelEditBtn').style.display = 'none';
+    }
+
+    function saveLink() {
+      const title = document.getElementById('newLinkTitle').value.trim();
+      const url = document.getElementById('newLinkUrl').value.trim();
+      const icon = document.getElementById('newLinkIcon').value;
+      const onlyInFooter = document.getElementById('newLinkOnlyFooter').checked;
+      const featured = document.getElementById('newLinkFeatured').checked;
+      const banner = document.getElementById('newLinkBanner').value.trim() || tempLinkBannerBase64;
+
+      if (!title || !url) {
+        alert('Bitte Titel und URL eingeben.');
+        return;
+      }
+
+      if (!siteData.links) siteData.links = [];
+
+      if (editingIndex !== null) {
+        siteData.links[editingIndex] = { title, url, icon, featured, banner, onlyInFooter };
+        cancelEdit();
+      } else {
+        siteData.links.push({ title, url, icon, featured, banner, onlyInFooter });
+        document.getElementById('newLinkTitle').value = '';
+        document.getElementById('newLinkUrl').value = '';
+        document.getElementById('newLinkIcon').value = 'link';
+        document.getElementById('newLinkFeatured').checked = false;
+        document.getElementById('newLinkOnlyFooter').checked = false;
+        document.getElementById('newLinkBanner').value = '';
+        tempLinkBannerBase64 = "";
+      }
+
+      saveData();
+      render();
+    }
+
+    function deleteLink(index) {
+      if (editingIndex === index) {
+        cancelEdit();
+      }
+      siteData.links.splice(index, 1);
+      saveData();
+      render();
+    }
+
+    async function fetchFromGitHub() {
+      const rawUrl = "https://raw.githubusercontent.com/Cr4xx0Dev/Bio/c58dee217d0e3aeea5eadbc0fa0b8da4b90d48cd/link-hub-config.json";
+      try {
+        const response = await fetch(rawUrl);
+        if (!response.ok) throw new Error('Netzwerk-Antwort war nicht ok');
+        const data = await response.json();
+        if (data && data.links && data.profile) {
+          siteData = data;
+          saveData();
+          render();
+          alert('Erfolgreich die neueste Konfiguration von GitHub geladen!');
+        } else {
+          alert('Die GitHub JSON-Struktur ist ungültig.');
+        }
+      } catch (err) {
+        alert('Fehler beim Laden von GitHub: ' + err.message);
+      }
+    }
+
+    function exportJSON() {
+      const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(siteData, null, 2));
+      const downloadAnchor = document.createElement('a');
+      downloadAnchor.setAttribute("href", dataStr);
+      downloadAnchor.setAttribute("download", "link-hub-config.json");
+      document.body.appendChild(downloadAnchor);
+      downloadAnchor.click();
+      downloadAnchor.remove();
+    }
+
+    function importJSON(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        try {
+          const parsed = JSON.parse(e.target.result);
+          if (parsed && parsed.links && parsed.profile) {
+            siteData = parsed;
+            saveData();
+            render();
+            alert('Konfiguration erfolgreich importiert!');
+          } else {
+            alert('Ungültiges JSON-Format.');
+          }
+        } catch (err) {
+          alert('Fehler beim Lesen der JSON-Datei: ' + err.message);
+        }
+      };
+      reader.readAsText(file);
+    }
+
+    loadData();
+    render();
+  </script>
+</body>
+</html>
