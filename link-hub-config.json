@@ -1,0 +1,38 @@
+{
+  "profile": {
+    "name": "Dein Name",
+    "bio": "Developer & Designer • Hier findest du all meine wichtigen Kanäle und Projekte auf einen Blick.",
+    "avatar": ""
+  },
+  "background": {
+    "image": "",
+    "color": "#c52b2b",
+    "blur": 29
+  },
+  "links": [
+    {
+      "title": "GitHub Profile",
+      "url": "https://github.com",
+      "icon": "code_blocks",
+      "featured": true
+    },
+    {
+      "title": "YouTube Kanal",
+      "url": "https://youtube.com",
+      "icon": "play_circle",
+      "featured": false
+    },
+    {
+      "title": "Discord Server",
+      "url": "https://discord.com",
+      "icon": "forum",
+      "featured": false
+    },
+    {
+      "title": "Kontakt per E-Mail",
+      "url": "mailto:deine@email.de",
+      "icon": "mail",
+      "featured": false
+    }
+  ]
+}
